@@ -28,12 +28,12 @@ export const AuthForm = ({ type }: AuthFormProps) => {
       if (type === 'login') {
         const data = await login(email, password);
         loginUser({email:"",id:"",role:"admin",name:""}, data.token);
-        navigate('/');
+        navigate('/chats');
         toast.success('Successfully logged in');
       } else {
         const data = await register(email, password, name);
         loginUser(data.user, data.token);
-        navigate('/');
+        navigate('/chats');
         toast.success('Account created successfully');
       }
     } catch (error) {
