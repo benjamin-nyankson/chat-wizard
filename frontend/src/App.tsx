@@ -13,6 +13,8 @@ import RegisterPage from "./pages/RegisterPage";
 import SettingsPage from "./pages/SettingsPage";
 import AdminPage from "./pages/AdminPage";
 import NotFound from "./pages/NotFound";
+import LandingPage from "./pages/LandingPage";
+import Providers from "./providers/Providers";
 
 type ProtectedRouteProps = {
   element: React.ReactElement;
@@ -38,12 +40,14 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <Providers>
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/" element={<LandingPage />} />
           <Route 
-            path="/" 
+            path="/chats" 
             element={<ProtectedRoute element={<HomePage />} />}
           />
           <Route 
@@ -57,6 +61,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
+      </Providers>
     </TooltipProvider>
   </QueryClientProvider>
 );
