@@ -7,6 +7,9 @@ import { useChatStore } from '../../store/chatStore';
 import { useAuthStore } from '../../store/authStore';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
+import { useTheme } from '@/context/ThemeContext';
+import ThemeToggle from '../ui/theme-toggle';
+
 
 type SidebarProps = {
   onClose?: () => void;
@@ -17,6 +20,8 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
   const location = useLocation();
   const { user, logout } = useAuthStore();
   const { chats, currentChatId, createChat, setCurrentChatId, deleteChat, clearChats } = useChatStore();
+  const { theme, toggleTheme } = useTheme();
+
 
   const handleLogout = () => {
     logout();
@@ -110,6 +115,9 @@ export const Sidebar = ({ onClose }: SidebarProps) => {
           <Settings className="h-4 w-4" />
           Settings
         </Button>
+        <div className='ml-4'>
+        <ThemeToggle />
+        </div>
         <Button
           variant="ghost"
           className="w-full justify-start gap-2 hover:bg-destructive/10 hover:text-destructive"

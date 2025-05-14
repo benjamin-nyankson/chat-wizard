@@ -17,7 +17,11 @@ const ChatMessage = ({ message }: { message: Message }) => {
   const isUser = message.role === 'user';
 
   return (
-    <div className={`chat-message-${message.role} p-4 rounded-lg mb-4`}>
+    <div className={`p-4 rounded-lg mb-4 ${
+      isUser
+        ? 'bg-white text-black dark:bg-gray-800 dark:text-white'
+        : 'bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-gray-100'
+    }`}>
       <div className="flex items-start gap-3">
         <Avatar className="shrink-0">
           <div className={`h-10 w-10 rounded-full flex items-center justify-center ${isUser ? 'bg-primary text-primary-foreground' : 'bg-secondary'}`}>
@@ -26,10 +30,12 @@ const ChatMessage = ({ message }: { message: Message }) => {
         </Avatar>
         <div className="flex-1">
           <div className="flex items-center justify-between mb-1">
-            <span className="font-medium">{isUser ? 'You' : 'AI Assistant'}</span>
-            <span className="text-xs text-muted-foreground">
-              {format(new Date(message.createdAt), 'HH:mm')}
-            </span>
+          <span className="font-medium text-gray-900 dark:text-gray-100">
+  {isUser ? 'You' : 'AI Assistant'}
+</span>
+<span className="text-xs text-muted-foreground dark:text-gray-400">
+  {format(new Date(message.createdAt), 'HH:mm')}
+</span>
           </div>
           <div className="prose prose-sm max-w-none dark:prose-invert">
             <ReactMarkdown
