@@ -41,7 +41,7 @@ router.post('/', auth, async (req, res) => {
       
       // Generate AI response (simplified for now)
       // const aiResponse = `This is a sample response to: "${message}"`;
-      const aiResponse = await getGeminiResponse(message);
+      const aiResponse = await getGeminiResponse(message, chat.messages);
       
       chat.messages.push({
         content: aiResponse,
@@ -66,7 +66,10 @@ router.post('/', auth, async (req, res) => {
       
       // Generate AI response (simplified for now)
       // const aiResponse = `This is a sample response to: "${message}"`;
-      const aiResponse = await getGeminiResponse(message);
+      const aiResponse = await getGeminiResponse(message,[{
+        content: message,
+        role: 'user'
+      }]);
       
       chat.messages.push({
         content: aiResponse,
