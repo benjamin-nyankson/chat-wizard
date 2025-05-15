@@ -65,7 +65,7 @@ export const MessageList = ({ chatId }: MessageListProps) => {
     return (
       <div className="flex h-full items-center justify-center">
         <div className="text-center">
-          <h3 className="text-lg font-medium">Welcome to AI Chat</h3>
+          <h3 className="text-lg font-medium">Welcome to AI SmartChat</h3>
           <p className="text-muted-foreground">Start a new conversation to get started.</p>
         </div>
       </div>

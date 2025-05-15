@@ -23,12 +23,6 @@ export const ChatInterface = () => {
 
   const { mutate: sendMessageMutation, isPending } = useSendMessage();
 
-  // Ensure there's a chat created when component mounts
-  // useEffect(() => {
-  //   if (!currentChatId) {
-  //     createChat();
-  //   }
-  // }, [currentChatId, createChat]);
 
   const handleSendMessage = async () => {
     const trimmedInput = input.trim();

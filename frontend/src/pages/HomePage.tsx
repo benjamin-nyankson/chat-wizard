@@ -2,28 +2,10 @@
 import React from 'react';
 import { ChatInterface } from '@/components/chat/ChatInterface';
 import { MainLayout } from '@/components/layout/MainLayout';
-import { useChats } from '@/hooks/useApi';
-import { useChatStore } from '@/store/chatStore';
 
 const HomePage = () => {
 
-  const {data,isFetching} = useChats()
-  const {setChats, chats} = useChatStore()
 
-  React.useEffect(() => {
-    if (data) {
-      const chatData = data.map(({ _id, createdAt, ...rest }) => {
-        return {
-          id: _id,
-          createdAt,
-          ...rest,
-        };
-      });
-  
-      setChats(chatData); 
-     
-    }
-  }, [data, setChats]);
   return (
     <MainLayout>
       <div className="flex h-full flex-col">

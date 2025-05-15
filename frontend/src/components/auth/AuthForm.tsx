@@ -27,7 +27,7 @@ export const AuthForm = ({ type }: AuthFormProps) => {
     try {
       if (type === 'login') {
         const data = await login(email, password);
-        loginUser({email:"",id:"",role:"admin",name:""}, data.token);
+        loginUser(data.user, data.token);
         navigate('/chats');
         toast.success('Successfully logged in');
       } else {

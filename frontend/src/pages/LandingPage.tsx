@@ -1,14 +1,13 @@
 import { MoveRight } from "lucide-react";
 import { LinkButton } from "@/components/ui/button-link";
-import ThemeToggle from "@/components/ui/theme-toggle";
+import { Navbar } from "@/components/nav/Navbar";
+import Logo from "@/components/Logo";
 
 
 function App() {
   return (
     <main className="bg-background text-foreground min-h-screen font-sans">
-        <header className="flex items-center justify-end p-4 bg-header">
-            <ThemeToggle/>
-            </header>
+            <Navbar />
       {/* Hero Section */}
       <section className="container mx-auto py-24 px-4 flex flex-col items-center text-center gap-6">
         <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight">
