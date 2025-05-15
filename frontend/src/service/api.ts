@@ -1,4 +1,5 @@
 
+import { User } from "@/store/authStore";
 import { toast } from "sonner";
 
 // Update the API URL to point to our Node server
@@ -145,6 +146,30 @@ export async function fetchAllChats(token: string) {
     return response.json();
   } catch (error) {
     toast.error(error instanceof Error ? error.message : 'Failed to fetch all chats');
+    throw error;
+  }
+}
+
+
+export async function updateUserProfile(token: string, userId: string, data: Omit<User, 'password' | 'role' | 'createdAt' | 'updatedAt' |"id">) {
+  try {
+    const response = await fetch(`${API_URL}/auth/update/${userId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+    });
+    
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'Failed to update user profile');
+    }
+    
+    return response.json();
+  } catch (error) {
+    toast.error(error instanceof Error ? error.message : 'Failed to update user profile');
     throw error;
   }
 }
