@@ -101,4 +101,37 @@ router.get('/me', auth, async (req, res) => {
   }
 });
 
+// Update user info
+router.put('/update', auth, async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+
+    // Find the user by ID from the auth middleware
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Update fields if provided
+    if (name !== undefined) user.name = name;
+    if (email !== undefined) user.email = email;
+    if (password !== undefined) user.password = password; // Password hashing is assumed in User model
+
+    await user.save();
+
+    res.json({
+      message: 'User updated successfully',
+      user: {
+        id: user._id,
+        email: user.email,
+        name: user.name,
+        role: user.role
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to update user info', error: error.message });
+  }
+});
+
+
 module.exports = router;
