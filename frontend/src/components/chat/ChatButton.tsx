@@ -5,6 +5,7 @@ import { Chat, useChatStore } from "../../store/chatStore";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { MenuOptions } from "../ui/MenuOptions";
+import { useNavigate,useLocation } from "react-router-dom";
 
 export default function ChatButton({
   chat,
@@ -19,8 +20,13 @@ export default function ChatButton({
     deleteChat,
   } = useChatStore();
 
+  const navigate = useNavigate();
+  const location = useLocation()
+
   const handleChatClick = (chatId: string) => {
     setCurrentChatId(chatId);
+    if(location.pathname !== "/chats") navigate("/chats");
+  
     if (onClose) onClose();
   };
 

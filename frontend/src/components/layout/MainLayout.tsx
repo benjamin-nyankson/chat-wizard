@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Sidebar } from './Sidebar';
 import { useAuthStore } from '../../store/authStore';
 import { useIsMobile } from '../../hooks/use-mobile';
@@ -16,6 +16,13 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
   const isMobile = useIsMobile();
   const [showSidebar, setShowSidebar] = useState(!isMobile);
 
+  useEffect(()=>{
+    if (isMobile) {
+      setShowSidebar(false);
+    } else {
+      setShowSidebar(true);
+    }
+  },[isMobile]);
   if (!isAuthenticated) {
     return <>{children}</>;
   }

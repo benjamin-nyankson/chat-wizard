@@ -1,7 +1,7 @@
 
 import { useQuery, useMutation, QueryClient } from '@tanstack/react-query';
 import * as api from '@/service/api';
-import { useAuthStore } from '@/store/authStore';
+import { useAuthStore, User } from '@/store/authStore';
 import { toast } from 'sonner';
 
 // Create a reusable query client to be used throughout the app
@@ -90,6 +90,24 @@ export function useDeleteChat() {
     },
     onError: (error) => {
       toast.error('Failed to delete chat');
+      console.error(error);
+    },
+  });
+}
+
+
+// Hook for updting a user profile
+export function useUpdateUserProfile() {
+  const { token } = useAuthStore();
+  
+  return useMutation({
+    mutationFn: ({ userId, data }: { userId: string, data:  Omit<User, 'password' | 'role' | 'createdAt' | 'updatedAt' |"id"> }) => 
+      api.updateUserProfile(token!, userId, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin', 'users'] });
+    },
+    onError: (error) => {
+      toast.error('Failed to update user profile');
       console.error(error);
     },
   });

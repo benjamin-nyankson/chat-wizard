@@ -153,7 +153,7 @@ export async function fetchAllChats(token: string) {
 
 export async function updateUserProfile(token: string, userId: string, data: Omit<User, 'password' | 'role' | 'createdAt' | 'updatedAt' |"id">) {
   try {
-    const response = await fetch(`${API_URL}/auth/update/${userId}`, {
+    const response = await fetch(`${API_URL}/auth/update`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
