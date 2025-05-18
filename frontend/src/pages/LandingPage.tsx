@@ -7,7 +7,7 @@ import Logo from "@/components/Logo";
 function App() {
   return (
     <main className="bg-background text-foreground min-h-screen font-sans">
-            <Navbar />
+            {/* <Navbar /> */}
       {/* Hero Section */}
       <section className="container mx-auto py-24 px-4 flex flex-col items-center text-center gap-6">
         <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight">

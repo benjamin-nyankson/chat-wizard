@@ -23,10 +23,9 @@ export const Navbar = () => {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex gap-6 items-center">
-          <Link to="/" className="text-muted-foreground hover:text-foreground transition">Home</Link>
-          <Link to="/about" className="text-muted-foreground hover:text-foreground transition">About</Link>
-          <Link to="/contact" className="text-muted-foreground hover:text-foreground transition">Contact</Link>
+          
           <ThemeToggle />
+          <p>{user?.email}</p>
           { isAuthenticated && <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Avatar className="h-8 w-8 cursor-pointer">
@@ -36,7 +35,7 @@ export const Navbar = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuItem asChild>
-                <Link to="/profile">Profile</Link>
+                <Link to="/chats">Chats</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link to="/settings">Settings</Link>
@@ -58,16 +57,20 @@ export const Navbar = () => {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-64">
-              <div className="flex flex-col gap-4 mt-8">
+              { isAuthenticated ? <div className="flex flex-col gap-4 mt-8">
                 <Link to="/" className="hover:underline">Home</Link>
-                <Link to="/about" className="hover:underline">About</Link>
-                <Link to="/contact" className="hover:underline">Contact</Link>
                 <Link to="/profile" className="hover:underline">Profile</Link>
                 <Link to="/settings" className="hover:underline">Settings</Link>
                 <Button variant="destructive" onClick={() => logout()}>
                   Logout
                 </Button>
+              </div> : 
+              <div className="flex flex-col gap-4 mt-8">
+                <Link to="/login" className="hover:underline">Login</Link>
+                <Link to="/register" className="hover:underline">Register</Link>
+                
               </div>
+              }
             </SheetContent>
           </Sheet>
         </div>
